@@ -48,7 +48,7 @@ const Login = () => {
         {/* Logo/Brand */}
         <div className="text-center mb-10">
           <h1 className="text-4xl font-black tracking-tighter mb-2 italic">
-            AI <span className="text-[#A6FF5D]">COACH.</span>
+            AI <span className="text-[#A6FF5D]">CAREER GUIDANCE.</span>
           </h1>
           <p className="text-gray-400 text-sm font-medium tracking-wide uppercase">
             Sign in to your professional workspace

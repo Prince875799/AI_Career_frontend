@@ -163,7 +163,7 @@ const CombineDashboard = () => {
         <div className="p-6 mb-4 flex items-center justify-between">
           {isSidebarOpen && (
             <h1 className="text-xl font-black tracking-tighter bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
-              AI CAREER.
+              AI CAREER GUIDANCE.
             </h1>
           )}
           <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-white/5 rounded-lg text-gray-400">
