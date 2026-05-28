@@ -31,7 +31,7 @@ export default function QuizPage() {
   const fetchQuestion = async () => {
     setQuestionData(null);
     try {
-      const res = await axios.post("http://localhost:5000/api/interview/start", { 
+      const res = await axios.post("https://ai-career-backend-3sbg.vercel.app/api/interview/start", { 
         role: state.role, 
         type: state.type 
       });

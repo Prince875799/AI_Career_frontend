@@ -18,7 +18,7 @@ function Roadmap() {
 
   const generateRoadmap = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/ask-ai", state);
+      const res = await axios.post("https://ai-career-backend-3sbg.vercel.app/api/ask-ai", state);
       setData(res.data.reply);
     } catch (error) {
       setData("### ❌ Generation Failed\nPlease check your server or API key.");
