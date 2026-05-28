@@ -3,7 +3,7 @@ import React, { createContext } from "react";
 export const authDataContext = createContext();
 
 function AuthContext({ children }) {
-  let serverUrl = "http://ai-career-backend-3sbg.vercel.app";
+  let serverUrl = "https://ai-career-backend-3sbg.vercel.app";
 
   let value = {
     serverUrl,
