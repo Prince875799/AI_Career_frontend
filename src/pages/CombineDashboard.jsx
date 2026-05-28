@@ -60,33 +60,45 @@ const CombineDashboard = () => {
       </p>
 
       {/* CARDS */}
-      <div className="grid md:grid-cols-3 gap-6 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
 
-        {[
-          {
-            title: "Career Roadmap",
-            desc: "AI analyzes your skills",
-            icon: <FaLightbulb className="text-[#A6FF5D]" />
-          },
-          {
-            title: "Resume Builder",
-            desc: "ATS optimized resume",
-            icon: <FaFileAlt className="text-[#A6FF5D]" />
-          },
-          {
-            title: "Interview Prep",
-            desc: "AI mock interviews",
-            icon: <FaRocket className="text-[#A6FF5D]" />
-          }
-        ].map((item, i) => (
-          <div key={i} className="p-6 bg-[#0D0D0D] border border-white/5 rounded-xl">
-            {item.icon}
-            <h3 className="text-white font-bold mt-2">{item.title}</h3>
-            <p className="text-gray-400 text-sm">{item.desc}</p>
-          </div>
-        ))}
+  {/* CAREER ROADMAP CARD */}
+  <div
+    onClick={() => setActiveTab("roadmap")}
+    className="cursor-pointer p-6 bg-[#0D0D0D] border border-white/5 rounded-2xl hover:bg-white/5 transition"
+  >
+    <FaLightbulb className="text-[#A6FF5D] text-2xl mb-2" />
+    <h3 className="text-white font-bold">Career Roadmap</h3>
+    <p className="text-gray-400 text-sm">
+      AI builds your career path
+    </p>
+  </div>
 
-      </div>
+  {/* RESUME BUILDER CARD */}
+  <div
+    onClick={() => setActiveTab("builder")}
+    className="cursor-pointer p-6 bg-[#0D0D0D] border border-white/5 rounded-2xl hover:bg-white/5 transition"
+  >
+    <FaFileAlt className="text-[#A6FF5D] text-2xl mb-2" />
+    <h3 className="text-white font-bold">Resume Builder</h3>
+    <p className="text-gray-400 text-sm">
+      Create ATS optimized resume
+    </p>
+  </div>
+
+  {/* INTERVIEW / QUIZ */}
+  <div
+    onClick={() => setActiveTab("interview")}
+    className="cursor-pointer p-6 bg-[#0D0D0D] border border-white/5 rounded-2xl hover:bg-white/5 transition"
+  >
+    <FaRocket className="text-[#A6FF5D] text-2xl mb-2" />
+    <h3 className="text-white font-bold">Test / Quiz Prep</h3>
+    <p className="text-gray-400 text-sm">
+      AI mock interview system
+    </p>
+  </div>
+
+</div>
     </div>
   );
 
@@ -149,7 +161,7 @@ const CombineDashboard = () => {
       >
 
         <div className="p-4 flex justify-between border-b border-white/10">
-          <span>AI CAREER</span>
+          <span>AI CAREER GUIDANCE</span>
           <button onClick={() => setMobileSidebar(false)}>✕</button>
         </div>
 
