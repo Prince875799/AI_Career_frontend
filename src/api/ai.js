@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const generateCareerAI = async (data) => {
   const res = await axios.post(
-    "http://localhost:5000/api/ask-ai",
+    "https://ai-career-backend-3sbg.vercel.app/api/ask-ai",
     data
   );
   return res.data.reply;
