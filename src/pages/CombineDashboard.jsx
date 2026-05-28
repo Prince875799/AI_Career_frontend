@@ -28,7 +28,7 @@ const CombineDashboard = () => {
   const { serverUrl } = useContext(authDataContext);
 
   const [activeTab, setActiveTab] = useState("overview");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // ✅ mobile default false
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ const CombineDashboard = () => {
       getCurrentUser();
       navigate("/login");
     } catch (error) {
-      console.log("Logout Error:", error);
+      console.log(error);
     }
   };
 
@@ -51,14 +51,61 @@ const CombineDashboard = () => {
     { id: "interview", name: "Mock Interview", icon: <FaUserTie /> },
   ];
 
+  // ================= DASHBOARD HERO (RESTORED FULL VERSION) =================
   const DashboardHero = () => (
-    <div className="p-6 md:p-12 max-w-6xl mx-auto">
-      <h2 className="text-3xl md:text-6xl font-black text-white">
-        Shape Your Future <span className="text-[#A6FF5D]">With AI</span>
-      </h2>
-      <p className="text-gray-400 mt-4">
-        Welcome back {userData?.name}
-      </p>
+    <div className="p-6 md:p-12 max-w-6xl mx-auto text-left">
+
+      <div className="space-y-6">
+
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#A6FF5D]/10 text-[#A6FF5D] text-xs font-bold">
+          <FaRobot /> AI Powered Career Intelligence
+        </div>
+
+        <h2 className="text-4xl md:text-6xl font-black text-white">
+          Shape Your Future <br />
+          <span className="text-[#A6FF5D]">With Precision.</span>
+        </h2>
+
+        <p className="text-gray-400 max-w-2xl">
+          Welcome back <span className="text-white">{userData?.name}</span>.
+          Your AI career engine is ready.
+        </p>
+
+        {/* ================= CARDS RESTORED ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+
+          {[
+            {
+              title: "Career Roadmap",
+              desc: "AI detects hidden skills and builds your path.",
+              icon: <FaLightbulb className="text-[#A6FF5D]" />
+            },
+            {
+              title: "Resume Builder",
+              desc: "ATS optimized resumes for higher selection.",
+              icon: <FaFileAlt className="text-[#A6FF5D]" />
+            },
+            {
+              title: "Interview Prep",
+              desc: "AI simulates real interview scenarios.",
+              icon: <FaRocket className="text-[#A6FF5D]" />
+            }
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-6 rounded-2xl bg-[#0D0D0D] border border-white/5"
+            >
+              <div className="text-2xl mb-3">{item.icon}</div>
+              <h3 className="text-white font-bold mb-2">{item.title}</h3>
+              <p className="text-gray-400 text-sm">{item.desc}</p>
+            </motion.div>
+          ))}
+
+        </div>
+
+      </div>
     </div>
   );
 
@@ -78,63 +125,38 @@ const CombineDashboard = () => {
   return (
     <div className="flex h-screen bg-[#050505] text-white overflow-hidden">
 
-      {/* ================= MOBILE OVERLAY ================= */}
+      {/* OVERLAY */}
       {isSidebarOpen && (
         <div
-          onClick={() => setIsSidebarOpen(false)}
           className="fixed inset-0 bg-black/60 z-40 md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
-      {/* ================= SIDEBAR ================= */}
+      {/* SIDEBAR */}
       <motion.aside
-        initial={false}
-        animate={{
-          x: isSidebarOpen ? 0 : -300
-        }}
-        className="
-          fixed md:relative top-0 left-0
-          h-full w-[280px]
-          bg-[#0A0A0A]
-          border-r border-white/5
-          z-50 md:z-0
-          md:translate-x-0
-          flex flex-col
-        "
+        animate={{ x: isSidebarOpen ? 0 : -300 }}
+        className="fixed md:relative top-0 left-0 w-[280px] h-full bg-[#0A0A0A] border-r border-white/5 z-50 md:translate-x-0"
       >
 
-        {/* Close button (mobile) */}
-        <div className="md:hidden flex justify-end p-4">
-          <button
-            onClick={() => setIsSidebarOpen(false)}
-            className="text-white text-xl"
-          >
-            ✕
-          </button>
-        </div>
-
-        {/* Logo */}
         <div className="p-5 flex justify-between items-center">
-          <h1 className="font-bold text-white text-lg">
-            AI CAREER
-          </h1>
+          <h1 className="font-bold">AI CAREER</h1>
 
           <button
-            className="text-white md:hidden"
+            className="md:hidden"
             onClick={() => setIsSidebarOpen(false)}
           >
             ✕
           </button>
         </div>
 
-        {/* Menu */}
-        <nav className="flex-1 px-3 space-y-2">
+        <nav className="px-3 space-y-2">
           {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => {
                 setActiveTab(item.id);
-                setIsSidebarOpen(false); // auto close mobile
+                setIsSidebarOpen(false);
               }}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl ${
                 activeTab === item.id
@@ -143,12 +165,11 @@ const CombineDashboard = () => {
               }`}
             >
               {item.icon}
-              <span>{item.name}</span>
+              {item.name}
             </button>
           ))}
         </nav>
 
-        {/* Logout */}
         <div className="p-4 border-t border-white/10">
           <button
             onClick={handleLogout}
@@ -157,30 +178,28 @@ const CombineDashboard = () => {
             <FaSignOutAlt /> Logout
           </button>
         </div>
+
       </motion.aside>
 
-      {/* ================= MAIN ================= */}
+      {/* MAIN */}
       <div className="flex-1 flex flex-col">
 
         {/* HEADER */}
         <header className="h-16 flex items-center justify-between px-4 border-b border-white/10">
 
-          {/* Hamburger */}
           <button
-            onClick={() => setIsSidebarOpen(true)}
             className="md:hidden text-xl"
+            onClick={() => setIsSidebarOpen(true)}
           >
             <FaBars />
           </button>
 
-          <h2 className="text-gray-400 text-sm uppercase">
+          <h2 className="text-sm text-gray-400">
             {activeTab}
           </h2>
 
           <div className="flex items-center gap-2">
-            <div className="text-sm hidden sm:block">
-              {userData?.name}
-            </div>
+            <span className="hidden sm:block">{userData?.name}</span>
             <FaRegUserCircle />
           </div>
 
@@ -194,7 +213,6 @@ const CombineDashboard = () => {
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
-              className="h-full"
             >
               {renderContent()}
             </motion.div>
@@ -202,6 +220,7 @@ const CombineDashboard = () => {
         </main>
 
       </div>
+
     </div>
   );
 };
